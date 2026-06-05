@@ -6,11 +6,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ 'DSAC | ' . $titleWindow }}</title>
+        <title>{{ config('app.name', 'DSAC') . ' | ' . ($titleWindow ?? '') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        {{-- FontAwesome --}}
+        <script src="https://kit.fontawesome.com/e732c9a5c1.js" crossorigin="anonymous"></script>
+
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -19,14 +23,17 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
-        <x-banner />
-
         <div class="min-h-screen bg-gray-100">
-            @include('components.includes.navbar')
-            
+            @include('components.includes.admin.navbar')
+            @include('components.includes.admin.sidebar')
             <!-- Page Content -->
-            <main class="pt-24 px-6 py-8 lg:px-8">
+            <main class="pt-20 px-6 pb-10 lg:ml-64 lg:px-8">
                 <div class="mx-auto max-w-7xl">
+                    @isset($breadcrumbs)
+                        <div class="mb-6">
+                            {{ $breadcrumbs }}
+                        </div>
+                    @endisset
                     {{ $slot }}
                 </div>
             </main>
