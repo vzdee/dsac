@@ -15,6 +15,8 @@
         {{-- FontAwesome --}}
         <script src="https://kit.fontawesome.com/e732c9a5c1.js" crossorigin="anonymous"></script>
 
+        {{-- TallStackui --}}
+        <tallstackui:script /> 
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])

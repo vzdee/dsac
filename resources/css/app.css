@@ -1,12 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* flowbite */
 @import "flowbite/src/themes/default";
 @plugin "flowbite/plugin";
 @source "../../node_modules/flowbite";
 
+/* tallstackui */
+@import '../../vendor/tallstackui/tallstackui/css/v4.css';
+@source '../../vendor/tallstackui/tallstackui/**/*.php';
 
 [x-cloak] {
     display: none;
