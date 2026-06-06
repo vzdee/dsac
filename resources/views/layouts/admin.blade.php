@@ -1,4 +1,4 @@
-@props(['titleWindow' => ''])
+@props(['titleWindow' => '', 'breadcrumbs' => []])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -31,12 +31,17 @@
             <!-- Page Content -->
             <main class="pt-20 px-6 pb-10 lg:ml-64 lg:px-8">
                 <div class="mx-auto max-w-7xl">
-                    @isset($breadcrumbs)
-                        <div class="mb-6">
-                            {{ $breadcrumbs }}
-                        </div>
-                    @endisset
-                    {{ $slot }}
+                    <x-ts-card >
+                        <x-slot:header>
+                            <div class="flex flex-col gap-6">
+                                @include('components.includes.admin.breadcrumbs')
+                                @isset($head)
+                                    {{ $head }}
+                                @endisset
+                            </div>
+                        </x-slot:header>
+                        {{ $slot }}
+                    </x-ts-card>
                 </div>
             </main>
         </div>

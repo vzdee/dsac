@@ -3,8 +3,8 @@
         [
             'name' => 'Dashboard',
             'icon' => 'fa-solid fa-gauge',
-            'href' => '',
-            'active' => '',
+            'href' => route('admin.index'),
+            'active' => request()->routeIs('admin.index'),
         ],
         [
             'name' => 'Usuarios',
@@ -21,8 +21,8 @@
         [
             'name' => 'Servicios',
             'icon' => 'fa-solid fa-briefcase',
-            'href' => '',
-            'active' => '',
+            'href' => route('admin.services.index'),
+            'active' => request()->routeIs('admin.services.*'),
         ],
         [
             'name' => 'Citas',
