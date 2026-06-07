@@ -41,11 +41,15 @@ class ServiceController extends Controller
         ]);
 
         // create service
-        Service::create([$service]);
+        Service::create($service);
         
         // return and flash message
-        return redirect(route('admin.services.index'))
-            ->with('success', 'Servicio creado exitosamente');
+        session()->flash('swal',[
+            'icon' => 'success',
+            'title' => 'Servicio creado correctamente',
+            'text' => 'Servicio creado con éxito',
+        ]);
+        return redirect(route('admin.services.index'));
     }
 
     /**
@@ -81,8 +85,12 @@ class ServiceController extends Controller
         $service->update($serviceData);
 
         // return and flash message
-        return redirect(route('admin.services.index'))
-            ->with('success','Servicio actualizado con éxito');
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Servicio Actualizado',
+            'text' => 'El servicio ha sido actualizado con éxito',
+        ]);
+        return redirect(route('admin.services.index'));
 
     }
 
@@ -94,6 +102,11 @@ class ServiceController extends Controller
         //delete service
         $service->delete();
         // return and flash message
-        return view('admin.services.index');
+        session()->flash('swal', [
+            'icon' => 'success',
+            'title' => 'Servicio Eliminado',
+            'text' => 'El servicio ha sido eliminado con éxito',
+        ]);
+        return redirect(route('admin.services.index'));
     }
 }

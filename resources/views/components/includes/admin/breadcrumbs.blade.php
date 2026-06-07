@@ -4,14 +4,13 @@
             @foreach ($breadcrumbs as $breadcrumb)
                 <li class="inline-flex items-center">
                     @if (!$loop->first)
-                        <svg class="w-3.5 h-3.5 rtl:rotate-180 text-body me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
+                        <svg class="w-3.5 h-3.5 rtl:rotate-180 text-body me-2 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" 
                         width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
                         </svg>
                     @endif
                     @if (isset($breadcrumb['href']) && !$loop->last)
-                        <a href="{{ $breadcrumb['href'] }}"
-                            class="text-gray-500 hover:text-gray-800 text-sm">{{ $breadcrumb['name'] }}</a>
+                        <a href="{{ $breadcrumb['href'] }}" class="text-gray-500 hover:text-gray-800 text-sm">{{ $breadcrumb['name'] }}</a>
                     @else
                         <span class="text-gray-800 text-sm">{{ $breadcrumb['name'] }}</span>
                     @endif

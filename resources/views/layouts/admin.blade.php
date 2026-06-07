@@ -15,6 +15,9 @@
         {{-- FontAwesome --}}
         <script src="https://kit.fontawesome.com/e732c9a5c1.js" crossorigin="anonymous"></script>
 
+        {{-- SweetAlert2 --}}
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         {{-- TallStackui --}}
         <tallstackui:script /> 
 
@@ -48,6 +51,11 @@
 
         @stack('modals')
         <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+        @if(session('swal'))
+            <script>
+                Swal.fire(@json(session('swal')));
+            </script>
+        @endif
         @livewireScripts
     </body>
 </html>
