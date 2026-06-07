@@ -30,7 +30,7 @@
             @include('components.includes.admin.sidebar')
             <!-- Page Content -->
             <main class="pt-20 px-6 pb-10 lg:ml-64 lg:px-8">
-                <div class="mx-auto max-w-7xl">
+                <div class="mx-auto max-w-8xl">
                     <x-ts-card >
                         <x-slot:header>
                             <div class="flex flex-col gap-6">

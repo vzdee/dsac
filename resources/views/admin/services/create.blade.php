@@ -24,10 +24,10 @@
             <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
                 <div>
                     <x-ts-input name="name" label="Nombre del servicio *" placeholder="Asesoría Fiscal Anual"
-                        autofocus required />
+                        :value="old('name')" autofocus required />
                 </div>
                 <div>
-                    <x-ts-input name="price" label="Precio *" placeholder="1,500" x-mask:dynamic="$money($input)" min="0"  required>
+                    <x-ts-input name="price" label="Precio *" placeholder="1,500" x-mask:dynamic="$money($input)" min="0" :value="old('price')"  required>
                         <x-slot:prefix>
                             <span class="text-gray-400 ms-2">$</span>
                         </x-slot:prefix>
@@ -40,6 +40,7 @@
                 <div>
                     <x-ts-textarea name="description" label="Descripción *"
                         placeholder="Agrega una breve explicación de lo que ofrece este servicio" maxlength="150"
+                        :value="old('description')"
                         required count />
                 </div>
             </div>

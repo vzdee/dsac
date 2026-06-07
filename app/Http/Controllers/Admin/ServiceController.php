@@ -62,6 +62,7 @@ class ServiceController extends Controller
     public function edit(Service $service)
     {
         //
+        return view('admin.services.edit', compact('service'));
     }
 
     /**
@@ -69,7 +70,20 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        //validate and update service
+        $request->merge(['price' => str_replace(',', '', $request->input('price')),]);
+        $serviceData = $request->validate([
+            'name' => 'required|string|max:150',
+            'description' => 'required|string|max:150',
+            'price' => 'required|integer|min:0',
+            'status' => 'required|in:active,inactive',
+        ]);
+        $service->update($serviceData);
+
+        // return and flash message
+        return redirect(route('admin.services.index'))
+            ->with('success','Servicio actualizado con éxito');
+
     }
 
     /**
@@ -77,6 +91,9 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        //delete service
+        $service->delete();
+        // return and flash message
+        return view('admin.services.index');
     }
 }
