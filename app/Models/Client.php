@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Permission\Traits\HasRoles;
 
 class Client extends Model
 {
     //
     use SoftDeletes;
+    use HasRoles;
 
     protected $fillable = [
         'rfc',

@@ -9,14 +9,14 @@
         [
             'name' => 'Usuarios',
             'icon' => 'fa-solid fa-users',
-            'href' => '',
-            'active' => '',
+            'href' => route('admin.users.index'),
+            'active' => request()->routeIs('admin.users.*'),
         ],
         [
             'name' => 'Clientes',
             'icon' => 'fa-solid fa-user-group',
-            'href' => '#',
-            'active' => '',
+            'href' => route('admin.clients.index'),
+            'active' => request()->routeIs('admin.clients.*'),
         ],
         [
             'name' => 'Servicios',

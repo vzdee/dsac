@@ -24,5 +24,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '999 359 6943',
             'password' => bcrypt('password'),
         ]);
+        
+        // seeders to run
+        $this->call(RoleSeeder::class);
     }
 }
