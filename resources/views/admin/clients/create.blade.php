@@ -90,13 +90,13 @@
                         <x-ts-input label="Dirección *" name="address" :value="old('address')" placeholder="Dirección"
                             maxlength="255" autocomplete="street-address" required />
                         <x-ts-input label="Código Postal *" name="postal_code" :value="old('postal_code')"
-                            placeholder="Código Postal" maxlength="5" autocomplete="postal-code" required />
+                            placeholder="Código Postal" x-mask="99999" inputmode="numeric" autocomplete="postal-code" required />
                     </div>
                     <div>
                         <h2 class="text-2xl font-medium text-gray-800 mb-2">Datos Fiscales</h2>
                         <x-ts-input label="Constancia de Situación Fiscal *" name="rfc" :value="old('rfc')"
-                            placeholder="Constancia de Situación Fiscal (RFC)" maxlength="13" required />
-                        <x-ts-input label="CURP *" name="curp" :value="old('curp')" placeholder="CURP" maxlength="18"
+                            placeholder="RFC" class="uppercase"  maxlength="13"  required />
+                        <x-ts-input label="CURP *" name="curp" :value="old('curp')" placeholder="CURP" class="uppercase" maxlength="18"
                             required />
                         <x-ts-input label="Razón Social *" name="social_reason" :value="old('social_reason')"
                             placeholder="Razón Social" maxlength="255" required />

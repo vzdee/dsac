@@ -94,12 +94,12 @@
                     <div>
                         <h2 class="text-2xl font-medium text-gray-800 mb-2">Dirección</h2>
                         <x-ts-input label="Dirección *" name="address" :value="old('address', $client->address)" placeholder="Dirección" maxlength="255" autocomplete="street-address" required/>
-                        <x-ts-input label="Código Postal *" name="postal_code" :value="old('postal_code', $client->postal_code)" placeholder="Código Postal" maxlength="5" autocomplete="postal-code" required/>
+                        <x-ts-input label="Código Postal *" name="postal_code" :value="old('postal_code', $client->postal_code)" placeholder="Código Postal" x-mask="99999" inputmode="numeric" autocomplete="postal-code" required/>
                     </div>
                     <div>
                         <h2 class="text-2xl font-medium text-gray-800 mb-2">Datos Fiscales</h2>
-                        <x-ts-input label="Constancia de Situación Fiscal *" name="rfc" :value="old('rfc', $client->rfc)" placeholder="Constancia de Situación Fiscal (RFC)" maxlength="13" required />
-                        <x-ts-input label="CURP *" name="curp" :value="old('curp', $client->curp)" placeholder="CURP" maxlength="18" required />
+                        <x-ts-input label="Constancia de Situación Fiscal *" name="rfc" :value="old('rfc', $client->rfc)" placeholder="RFC" maxlength="13" class="uppercase" required />
+                        <x-ts-input label="CURP *" name="curp" :value="old('curp', $client->curp)" placeholder="CURP" maxlength="18" class="uppercase" required />
                         <x-ts-input label="Razón Social *" name="social_reason" :value="old('social_reason', $client->social_reason)" placeholder="Razón Social" maxlength="255" required />
                         <x-ts-input label="Régimen Fiscal *" name="fiscal_regime" :value="old('fiscal_regime', $client->fiscal_regime)" placeholder="Régimen Fiscal" maxlength="255" required />
                     </div>

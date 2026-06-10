@@ -47,7 +47,8 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // merge data before validation
+        $request->merge(['rfc' => strtoupper($request->rfc), 'curp' => strtoupper($request->curp),]);
         $data = $request->validate([
             // user data validation
             'name' => 'required|string|max:50',
@@ -57,9 +58,9 @@ class ClientController extends Controller
             'password' => 'required|string|min:8|confirmed',
             // client data validation
             'address' => 'required|string|max:255',
-            'postal_code' => 'required|string|max:5',
-            'rfc' => 'required|string|max:13|unique:clients,rfc',
-            'curp' => 'required|string|max:18|unique:clients,curp',
+            'postal_code' => 'required|digits:5',
+            'rfc' => ['required','string','max:13','regex:/^([A-ZÑ&]{3,4})(\d{6})([A-Z0-9]{3})$/','unique:clients,rfc',],
+            'curp' => ['required','string','size:18','regex:/^[A-Z][AEIOUX][A-Z]{2}\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[HM](AS|BC|BS|CC|CL|CM|CS|CH|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9]\d$/', 'unique:clients,curp',],   
             'social_reason' => 'required|string|max:255',
             'fiscal_regime' => 'required|string|max:255',
         ]);
