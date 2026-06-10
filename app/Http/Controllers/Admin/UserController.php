@@ -109,6 +109,9 @@ class UserController extends Controller
         ]);
         
         $user->update($userValidated);
+        $role = Role::findOrFail($userValidated['role_id']); //find role id
+        $user->syncRoles($role); //sync role to user
+        // flash message before redirect
         return redirect()->route('admin.users.index')
             ->with('swal', [
                 'icon' => 'success',

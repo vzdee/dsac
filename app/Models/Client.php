@@ -13,6 +13,7 @@ class Client extends Model
     use HasRoles;
 
     protected $fillable = [
+        'user_id',
         'rfc',
         'curp',
         'social_reason',

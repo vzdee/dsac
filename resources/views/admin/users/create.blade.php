@@ -22,7 +22,7 @@
             @csrf
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div>
-                    <x-ts-input label="Nombre(s) *" name="name" placeholder="Juan Carlos" maxlength="50" :value="old('name')" required/>
+                    <x-ts-input label="Nombre(s) *" name="name" placeholder="Ej: Juan Carlos" maxlength="50" :value="old('name')" required/>
                 </div>
                 <div>
                     <x-ts-input label="Apellido(s) *" name="last_name" placeholder="Ej: Pérez García" maxlength="50" :value="old('last_name')" required/>
