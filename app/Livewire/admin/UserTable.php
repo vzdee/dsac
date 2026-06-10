@@ -25,12 +25,17 @@ class UserTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
-                ->sortable(),
-            Column::make("Nombre(s)", "name"),
-            Column::make("Apellido(s)", "last_name"),
-            Column::make("Correo", "email"),
-            Column::make("Teléfono", "phone_number"),
+            Column::make("Id Usuario", "id")
+                ->sortable()
+                ->searchable(),
+            Column::make("Nombre(s)", "name")
+                ->searchable(),
+            Column::make("Apellido(s)", "last_name")
+                ->searchable(),
+            Column::make("Correo", "email")
+                ->searchable(),
+            Column::make("Teléfono", "phone_number")
+                ->searchable(),
             Column::make("Rol Asignado")
                 ->label(function ($row) {
                     $role = $row->roles->first()?->name;

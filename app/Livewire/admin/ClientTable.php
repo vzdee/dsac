@@ -26,10 +26,13 @@ class ClientTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
-                ->sortable(),
-            Column::make("Nombre(s)", "user.name"),
-            Column::make("Correo", "user.email"),
+            Column::make("Id Cliente", "id")
+                ->sortable()
+                ->searchable(),
+            Column::make("Nombre(s)", "user.name")
+                ->searchable(),
+            Column::make("Correo", "user.email")
+                ->searchable(),
             Column::make("Rfc", "rfc")
                 ->format(function ($value){
                     return $value ?? 'Sin Datos Registrados';

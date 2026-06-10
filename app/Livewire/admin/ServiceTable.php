@@ -20,8 +20,10 @@ class ServiceTable extends DataTableComponent
     {
         return [
             Column::make("ID Servicio", "id")
-                ->sortable(),
-            Column::make("Nombre Servicio", "name"),
+                ->sortable()
+                ->searchable(),
+            Column::make("Nombre Servicio", "name")
+                ->searchable(),
             Column::make("Descripción Servicio", "description")
                 ->format(function($value){
                     return strlen($value) > 35 ? substr($value, 0, 35) . '...' : $value;
