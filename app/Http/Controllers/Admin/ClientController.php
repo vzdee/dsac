@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\User;
+use App\Support\Catalogs\MexicoStates;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -27,9 +28,9 @@ class ClientController extends Controller
         $defaultTab = 'general-data';
         $errorGroups = [
             'general-data' => ['name', 'last_name', 'email', 'phone_number', 'password' ],
-            'fiscal-data' => ['address', 'postal_code', 'rfc', 'curp', 'social_reason', 'fiscal_regime'],
-        ];
+            'fiscal-data' => ['address', 'postal_code', 'rfc', 'curp', 'social_reason', 'fiscal_regime'],];
         $errors = session('errors');
+        $states = MexicoStates::options();
         if ($errors) {
             foreach ($errorGroups as $tabName => $fields) {
                 if ($errors->hasAny($fields)) {
@@ -37,9 +38,8 @@ class ClientController extends Controller
                     break;
                 }
             }
-
         }
-        return view('admin.clients.create', compact('defaultTab', 'errorGroups'));
+        return view('admin.clients.create', compact('defaultTab', 'errorGroups', 'states'));
     }
 
     /**
@@ -63,6 +63,10 @@ class ClientController extends Controller
             'curp' => ['required','string','size:18','regex:/^[A-Z][AEIOUX][A-Z]{2}\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[HM](AS|BC|BS|CC|CL|CM|CS|CH|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9]\d$/', 'unique:clients,curp',],   
             'social_reason' => 'required|string|max:255',
             'fiscal_regime' => 'required|string|max:255',
+            'gender' => 'required|in:male,female',
+            'birth_date' => 'required|date|before_or_equal:' . now()->subYears(18)->format('Y-m-d') . '|after_or_equal:' . now()->subYears(90)->format('Y-m-d'),
+            'state' => 'required|string|max:25',
+            'municipality' => 'required|string|max:50',
         ]);
         // validate and create the user and client
         $user = User::create([
@@ -70,6 +74,8 @@ class ClientController extends Controller
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'phone_number' => $data['phone_number'],
+            'gender' => $data['gender'],
+            'birth_date' => $data['birth_date'],
             'password' => $data['password'],
         ]);
         $user->assignRole('Cliente');
@@ -82,6 +88,8 @@ class ClientController extends Controller
             'curp' => $data['curp'],
             'social_reason' => $data['social_reason'],
             'fiscal_regime' => $data['fiscal_regime'],
+            'state' => $data['state'],
+            'municipality' => $data['municipality'],
         ]);
         // flash message before redirect
         return redirect()->route('admin.clients.index')
@@ -99,7 +107,8 @@ class ClientController extends Controller
     {
         //
         $defaultTab = 'general-data';
-        return view('admin.clients.show', compact('client', 'defaultTab'));
+        $states = MexicoStates::options();
+        return view('admin.clients.show', compact('client', 'defaultTab', 'states'));
     }
 
     /**
@@ -109,10 +118,9 @@ class ClientController extends Controller
     {
         //
         $defaultTab = 'general-data';
+
         // fields that can have errors
-        $errorGroups = [
-            'fiscal-data' => ['address', 'postal_code', 'rfc', 'curp', 'social_reason', 'fiscal_regime'],
-        ];
+        $errorGroups = ['fiscal-data' => ['address', 'postal_code', 'rfc', 'curp', 'social_reason', 'fiscal_regime'],];
         $errors = session('errors');
         if ($errors) {
             foreach ($errorGroups as $tabName => $fields) {
@@ -122,7 +130,8 @@ class ClientController extends Controller
                 }
             }
         }
-        return view('admin.clients.edit', compact('client', 'defaultTab', 'errorGroups'));
+        $states = MexicoStates::options();
+        return view('admin.clients.edit', compact('client', 'defaultTab', 'errorGroups', 'states'));
     }
 
     /**
@@ -130,14 +139,17 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        //merge data before validation
+        $request->merge(['rfc' => strtoupper($request->rfc), 'curp' => strtoupper($request->curp),]);
         $clientData = $request->validate([
             'address' => 'required|string|max:255',
-            'postal_code' => 'required|string|max:5',
-            'rfc' => 'required|string|max:13|unique:clients,rfc,' . $client->id,
-            'curp' => 'required|string|max:18|unique:clients,curp,' . $client->id,
+            'postal_code' => 'required|digits:5',
+            'rfc' => ['required','string','max:13','regex:/^([A-ZÑ&]{3,4})(\d{6})([A-Z0-9]{3})$/','unique:clients,rfc,' . $client->id,],
+            'curp' => ['required','string','size:18','regex:/^[A-Z][AEIOUX][A-Z]{2}\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[HM](AS|BC|BS|CC|CL|CM|CS|CH|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9]\d$/', 'unique:clients,curp,' . $client->id,],  
             'social_reason' => 'required|string|max:255',
             'fiscal_regime' => 'required|string|max:255',
+            'state' => 'required|string|max:25',
+            'municipality' => 'required|string|max:50',
         ]);
         $client->update($clientData);
         return redirect()->route('admin.clients.index')

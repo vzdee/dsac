@@ -53,7 +53,6 @@
                         Documentos
                     </x-tab-link>
                 </x-slot>
-
                 {{-- tab content --}}
                 {{-- general data --}}
                 <x-tab-content tab="general-data">
@@ -69,13 +68,16 @@
                             </x-ts-button>
                         </div>
                     </div>
-                    <div>
-                        <h2 class="text-2xl font-medium text-gray-800 mb-2">Datos Generales</h2>
-                        <h3 class=" text-gray-600 mb-2">ID Usuario: <em class="text-gray-800 font-medium not-italic">{{ $client->user->id }}</em> </h3>
-                        <h3 class=" text-gray-600 mb-2">Nombre Completo: <em class="text-gray-800 font-medium not-italic">{{ $client->user->name . ' ' . $client->user->last_name }} </em> </h3>
+                    <div class="flex flex-col gap-1">
+                        <h2 class="text-2xl font-medium text-gray-800 mb-2">Información Personal</h2>
+                        <h3 class="text-gray-600 mb-2">ID Usuario: <em class="text-gray-800 font-medium not-italic">{{ $client->user->id }}</em> </h3>
+                        <h3 class="text-gray-600 mb-2">Nombre Completo: <em class="text-gray-800 font-medium not-italic">{{ $client->user->name . ' ' . $client->user->last_name }} </em> </h3>
+                        <h3 class="text-gray-600 mb-2">Género: <em 
+                            class="text-gray-800 font-medium not-italic">{{ $client->user->gender === 'male' ? 'Masculino' : ($client->user->gender === 'female' ? 'Femenino' : 'No especificado') }}</em> </h3>
+                        <h3 class="text-gray-600 mb-2">Fecha de Nacimiento: <em class="text-gray-800 font-medium not-italic">{{ $client->user->birth_date ? $client->user->birth_date->format('d/m/Y') : 'No especificada' }}</em> </h3>
                     </div>
-                    <div>
-                        <h2 class="text-2xl font-medium text-gray-800 mb-2">Contacto</h2>
+                    <div class="flex flex-col gap-1">
+                        <h2 class="text-2xl font-medium text-gray-800 mb-2">Información De Contacto</h2>
                         <h3 class=" text-gray-600 mb-2">Correo Electrónico: <em class="text-gray-800 font-medium not-italic">{{ $client->user->email }}</em> </h3>
                         <h3 class=" text-gray-600 mb-2">Teléfono: <em class="text-gray-800 font-medium not-italic">{{ $client->user->phone_number }}</em> </h3>
                     </div>
@@ -84,19 +86,19 @@
                 {{-- fiscal data --}}
                 <x-tab-content tab="fiscal-data">
                     <div class="lg:col-span-2 rounded-xl border border-gray-200 bg-gray-100 p-5">
-                        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                            <div>
-                                <h2 class="text-xl font-semibold text-gray-800">Información vinculada al cliente</h2>
-                                <p class="mt-1 text-sm text-gray-500"><span class="text-red-500">*</span> Esta información es necesaria para la emisión de facturas y otros documentos fiscales, asi para mantener registros actualizados.</p>
-                            </div>
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-800">Información vinculada al cliente</h2>
+                            <p class="mt-1 text-sm text-gray-500"><span class="text-red-500">*</span> Esta información es necesaria para la emisión de facturas y otros documentos fiscales, asi para mantener registros actualizados.</p>
                         </div>
                     </div>
-                    <div>
-                        <h2 class="text-2xl font-medium text-gray-800 mb-2">Dirección</h2>
+                    <div class="flex flex-col gap-4 border border-gray-200 bg-white p-5 rounded-lg shadow-sm">
+                        <h2 class="text-2xl font-medium text-gray-800 mb-2">Datos Domiciliarios</h2>
                         <x-ts-input label="Dirección *" name="address" :value="old('address', $client->address)" placeholder="Dirección" maxlength="255" autocomplete="street-address" required/>
                         <x-ts-input label="Código Postal *" name="postal_code" :value="old('postal_code', $client->postal_code)" placeholder="Código Postal" x-mask="99999" inputmode="numeric" autocomplete="postal-code" required/>
+                        <x-ts-select.styled label="Estado *" name="state" placeholder="Elige una opción" :value="old('state', $client->state)" :options="$states" searchable required />
+                        <x-ts-input label="Ciudad o Municipio *" name="municipality" :value="old('municipality', $client->municipality)" maxlength="50" placeholder="Ciudad o Municipio" required />
                     </div>
-                    <div>
+                    <div class="flex flex-col gap-4 border border-gray-200 bg-white p-5 rounded-lg shadow-sm">
                         <h2 class="text-2xl font-medium text-gray-800 mb-2">Datos Fiscales</h2>
                         <x-ts-input label="Constancia de Situación Fiscal *" name="rfc" :value="old('rfc', $client->rfc)" placeholder="RFC" maxlength="13" class="uppercase" required />
                         <x-ts-input label="CURP *" name="curp" :value="old('curp', $client->curp)" placeholder="CURP" maxlength="18" class="uppercase" required />

@@ -46,6 +46,8 @@ class UserController extends Controller
             'last_name' => 'required|string|max:50',
             'email' => 'required|email|max:100|unique:users,email',
             'phone_number' => 'required|string|max:20|unique:users,phone_number',
+            'gender' => 'required|in:male,female',
+            'birth_date' => 'required|date|before_or_equal:' . now()->subYears(18)->format('Y-m-d') . '|after_or_equal:' . now()->subYears(90)->format('Y-m-d'),
             'password' => 'required|string|min:8|confirmed',
             'role_id' => 'required|exists:roles,id',
         ]);
@@ -105,9 +107,15 @@ class UserController extends Controller
             'last_name' => 'required|string|max:50',
             'email' => 'required|email|max:100|unique:users,email,'.$user->id,
             'phone_number' => 'required|string|max:20|unique:users,phone_number,'.$user->id,
+            'gender' => 'required|in:male,female',
+            'birth_date' => 'required|date|before_or_equal:' . now()->subYears(18)->format('Y-m-d') . '|after_or_equal:' . now()->subYears(90)->format('Y-m-d'),
             'role_id' => 'required|exists:roles,id',
         ]);
-        
+        // validate password only if it's filled
+        if($request->filled('password')){
+            $request->validate(['password' => 'required|string|min:8|confirmed',]);
+            $userValidated['password'] = $request->input('password');
+        };
         $user->update($userValidated);
         $role = Role::findOrFail($userValidated['role_id']); //find role id
         $user->syncRoles($role); //sync role to user

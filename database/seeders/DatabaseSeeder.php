@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test',
             'last_name' => 'User',
             'email' => 'test@gmail.com',
-            'phone_number' => '999 359 6943',
+            'phone_number' => '(999) 359 6943',
+            'gender' => 'male',
+            'birth_date' => '2003-02-03',
             'password' => bcrypt('password'),
         ]);
         

@@ -62,16 +62,18 @@
                             </div>
                             <x-ts-button href="{{ route('admin.users.edit', $client->user->id) }}" color="indigo"  outline sm>
                                 <i class="fa-solid fa-up-right-from-square mr-1"></i>
-                                Editar usuario
+                                Editar Usuario
                             </x-ts-button>
                         </div>
                     </div>
-                    <div>
+                    <div class="flex flex-col gap-1">
                         <h2 class="text-2xl font-medium text-gray-800 mb-2">Datos Generales</h2>
                         <h3 class=" text-gray-600 mb-2">ID Usuario: <em class="text-gray-800 font-medium not-italic">{{ $client->user->id }}</em> </h3>
                         <h3 class=" text-gray-600 mb-2">Nombre Completo: <em class="text-gray-800 font-medium not-italic">{{ $client->user->name . ' ' . $client->user->last_name }} </em> </h3>
+                        <h3 class=" text-gray-600 mb-2">Género: <em class="text-gray-800 font-medium not-italic">{{ $client->user->gender === 'male' ? 'Masculino' : ($client->user->gender === 'female' ? 'Femenino' : 'No especificado') }}</em> </h3>
+                        <h3 class=" text-gray-600 mb-2">Fecha de Nacimiento: <em class="text-gray-800 font-medium not-italic">{{ $client->user->birth_date ? $client->user->birth_date->format('d M Y') : 'No especificada' }}</em></h3>
                     </div>
-                    <div>
+                    <div class="flex flex-col gap-1">
                         <h2 class="text-2xl font-medium text-gray-800 mb-2">Contacto</h2>
                         <h3 class=" text-gray-600 mb-2">Correo Electrónico: <em class="text-gray-800 font-medium not-italic">{{ $client->user->email }}</em> </h3>
                         <h3 class=" text-gray-600 mb-2">Teléfono: <em class="text-gray-800 font-medium not-italic">{{ $client->user->phone_number }}</em> </h3>
@@ -92,12 +94,14 @@
                             </x-ts-button>
                         </div>
                     </div>
-                    <div>
-                        <h2 class="text-2xl font-medium text-gray-800 mb-2">Dirección</h2>
+                    <div class="flex flex-col gap-1">
+                        <h2 class="text-2xl font-medium text-gray-800 mb-2">Información Domiciliaria</h2>
                         <h3 class=" text-gray-600 mb-2">Dirección: <em class="text-gray-800 font-medium not-italic">{{ $client->address ?? 'Sin datos registrados' }}</em> </h3>
                         <h3 class=" text-gray-600 mb-2">Código Postal: <em class="text-gray-800 font-medium not-italic">{{ $client->postal_code ?? 'Sin datos registrados' }} </em> </h3>
+                        <h3 class=" text-gray-600 mb-2">Estado: <em class="text-gray-800 font-medium not-italic">{{ $client->state ?? 'Sin datos registrados' }} </em> </h3>
+                        <h3 class=" text-gray-600 mb-2">Municipio: <em class="text-gray-800 font-medium not-italic">{{ $client->municipality ?? 'Sin datos registrados' }} </em> </h3>
                     </div>
-                    <div>
+                    <div class="flex flex-col gap-1">
                         <h2 class="text-2xl font-medium text-gray-800 mb-2">Datos Fiscales</h2>
                         <h3 class=" text-gray-600 mb-2">Constancia de Situación Fiscal: <em class="text-gray-800 font-medium not-italic">{{ $client->rfc ?? 'Sin datos registrados' }}</em> </h3>
                         <h3 class=" text-gray-600 mb-2">CURP: <em class="text-gray-800 font-medium not-italic">{{ $client->curp ?? 'Sin datos registrados' }}</em> </h3>

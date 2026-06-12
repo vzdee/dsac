@@ -10,7 +10,7 @@
         </x-ts-button>
     </div>
     <div>
-        <form action="{{ route('admin.services.destroy', $service->id) }}" method="POST">
+        <form action="{{ route('admin.services.destroy', $service->id) }}" method="POST" class="js-confirm-action">
             @csrf
             @method('DELETE')
             <x-ts-button type="submit" color="red" title="Eliminar Servicio">

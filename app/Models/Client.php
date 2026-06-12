@@ -19,7 +19,9 @@ class Client extends Model
         'social_reason',
         'fiscal_regime',
         'address',
-        'postal_code'
+        'postal_code',
+        'state',
+        'municipality'
     ];
 
     public function user(){
