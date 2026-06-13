@@ -14,17 +14,20 @@
                 <div>
                     <x-ts-input label="Correo Electrónico *" name="email" placeholder="Ej: juan.perez@example.com" :value="old('email')" required autocomplete="username" />
                 </div>
-                
+
                 <div>
-                    <x-ts-input label="Número de Teléfono *" name="phone" :value="old('phone')" placeholder="(999) 123 9876" autocomplete="tel" x-mask="(999) 999 9999" maxlength="15"/>
+                    <x-ts-input label="Número de Teléfono *" name="phone_number" :value="old('phone_number')" placeholder="(999) 123 9876" autocomplete="tel" x-mask="(999) 999 9999" maxlength="15"/>
                 </div>
 
                 <div>
-                    <x-ts-select.styled label="Género *" name="gender" :options="[['value' => 'male', 'label' => 'Masculino'], ['value' => 'female', 'label' => 'Femenino']]" :value="old('gender')" required/>
+                    <x-ts-select.styled label="Género *" name="gender" placeholder="Masculino" :options="[
+                    ['value' => 'male', 'label' => 'Masculino'], 
+                    ['value' => 'female', 'label' => 'Femenino']]" :value="old('gender')" required />
                 </div>
 
                 <div>
-                    <x-ts-date label="Fecha de Nacimiento *" placeholder="Ej: 26/03/2003" format="DD/MM/YYYY" :min-date="now()->subYears(90)->format('Y-m-d')" :max-date="now()->subYears(18)->format('Y-m-d')" :value="old('birth_date')"  required/>
+                    <x-ts-date label="Fecha de Nacimiento *" name="birth_date" placeholder="Ej: 26/03/2003" format="DD/MM/YYYY" :value="old('birth_date')"
+                    :min-date="now()->subYears(90)->format('Y-m-d')" :max-date="now()->subYears(18)->format('Y-m-d')"   required/>
                 </div>
 
                 <div>
