@@ -3,27 +3,35 @@
         <form method="POST" action="{{ route('register') }}" x-data>
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="md:mb-4">
+                <div>
                     <x-ts-input label="Nombre(s) *" placeholder="Ej: Juan Carlos" name="name" :value="old('name')" required autofocus autocomplete="name" />
                 </div>
 
-                <div class="md:mb-4">
+                <div>
                     <x-ts-input label="Apellido(s) *" placeholder="Ej: Pérez García" name="last_name" :value="old('last_name')" required autofocus autocomplete="last_name" />
                 </div>
 
-                <div class="md:mb-4">
-                    <x-ts-input label="Número de Teléfono *" name="phone" :value="old('phone')" placeholder="(999) 123 9876" autocomplete="tel" x-mask="(999) 999 9999" maxlength="15"/>
-                </div>
-    
-                <div class="md:mb-4">
+                <div>
                     <x-ts-input label="Correo Electrónico *" name="email" placeholder="Ej: juan.perez@example.com" :value="old('email')" required autocomplete="username" />
                 </div>
-    
-                <div class="md:mb-4">
+                
+                <div>
+                    <x-ts-input label="Número de Teléfono *" name="phone" :value="old('phone')" placeholder="(999) 123 9876" autocomplete="tel" x-mask="(999) 999 9999" maxlength="15"/>
+                </div>
+
+                <div>
+                    <x-ts-select.styled label="Género *" name="gender" :options="[['value' => 'male', 'label' => 'Masculino'], ['value' => 'female', 'label' => 'Femenino']]" :value="old('gender')" required/>
+                </div>
+
+                <div>
+                    <x-ts-date label="Fecha de Nacimiento *" placeholder="Ej: 26/03/2003" format="DD/MM/YYYY" :min-date="now()->subYears(90)->format('Y-m-d')" :max-date="now()->subYears(18)->format('Y-m-d')" :value="old('birth_date')"  required/>
+                </div>
+
+                <div>
                     <x-ts-password label="Contraseña *" name="password" placeholder="Al menos 8 carácteres" required autocomplete="new-password" />
                 </div>
     
-                <div class="md:mb-4">
+                <div>
                     <x-ts-password label="Confirmar Contraseña *" name="password_confirmation" placeholder="Confirma tu contraseña" required autocomplete="new-password"/>
                 </div>
             </div>

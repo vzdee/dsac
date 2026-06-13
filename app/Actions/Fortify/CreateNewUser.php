@@ -24,6 +24,9 @@ class CreateNewUser implements CreatesNewUsers
             'last_name' => ['required', 'string' , 'max:50'],
             'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
             'phone_number' => ['required', 'string', 'max:20', 'unique:users'],
+            'gender' => ['required', 'in:male,female'],
+            'birth_date' => ['required', 'date', 
+            'before_or_equal:'. now()->subYears(18)->format('Y-m-d'), 'after_or_equal:' . now()->subYears(90)->format('Y-m-d')],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
@@ -33,6 +36,8 @@ class CreateNewUser implements CreatesNewUsers
             'last_name' => $input['last_name'],
             'email' => $input['email'],
             'phone_number' => $input['phone_number'],
+            'gender' => $input['gender'],
+            'birth_date' => $input['birth_date'],
             'password' => Hash::make($input['password']),
 
         ]);
