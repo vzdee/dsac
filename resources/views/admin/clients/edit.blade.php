@@ -103,15 +103,12 @@
                         <x-ts-input label="Constancia de Situación Fiscal *" name="rfc" :value="old('rfc', $client->rfc)" placeholder="RFC" maxlength="13" class="uppercase" required />
                         <x-ts-input label="CURP *" name="curp" :value="old('curp', $client->curp)" placeholder="CURP" maxlength="18" class="uppercase" required />
                         <x-ts-input label="Razón Social *" name="social_reason" :value="old('social_reason', $client->social_reason)" placeholder="Razón Social" maxlength="255" required />
-                        <x-ts-input label="Régimen Fiscal *" name="fiscal_regime" :value="old('fiscal_regime', $client->fiscal_regime)" placeholder="Régimen Fiscal" maxlength="255" required />
+                        <x-ts-select.styled label="Régimen Fiscal *" name="fiscal_regime" :value="old('fiscal_regime', $client->fiscal_regime)" placeholder="Régimen Fiscal" :options="$regime" searchable required />
                     </div>
                 </x-tab-content>
                 
                 {{-- documents --}}
                 <x-tab-content tab="documents">
-                    <div class="bg-gray-100 rounded-xl border border-gray-200 p-5">
-                        {{-- upload --}}
-                    </div>
                 </x-tab-content>
             </x-tab>
         </form>

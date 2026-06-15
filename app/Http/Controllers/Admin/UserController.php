@@ -68,6 +68,14 @@ class UserController extends Controller
             return redirect()->route('admin.clients.edit', $cliente);
         }
 
+        if ($user->hasRole('Contador')){
+            $contador = $user->accountant()->firstOrCreate();
+            // currently we dont' have extra fields for accountants, but we can redirect to edit page for future use
+            return redirect()->route('admin.employees.edit', $contador);
+        }
+
+
+
         // redirect
         return redirect()->route('admin.users.index');
     }

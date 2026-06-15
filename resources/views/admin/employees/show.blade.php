@@ -1,4 +1,4 @@
-<x-admin-layout titleWindow="Detalles Cliente" :breadcrumbs="[
+<x-admin-layout titleWindow="Detalles de Empleado" :breadcrumbs="[
     ['name' => 'Dashboard', 'href' => route('admin.index')],
     ['name' => 'Empleados', 'href' => route('admin.employees.index')],
     ['name' => 'Detalles Empleado'],

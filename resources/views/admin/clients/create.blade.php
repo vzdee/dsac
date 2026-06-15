@@ -114,8 +114,8 @@
                             required />
                         <x-ts-input label="Razón Social *" name="social_reason" :value="old('social_reason')"
                             placeholder="Razón Social" maxlength="255" required />
-                        <x-ts-input label="Régimen Fiscal *" name="fiscal_regime" :value="old('fiscal_regime')"
-                            placeholder="Régimen Fiscal" maxlength="255" required />
+                        <x-ts-select.styled label="Régimen Fiscal *" name="fiscal_regime" :value="old('fiscal_regime')"
+                            placeholder="Régimen Fiscal" :options="$regime" searchable required />
                     </div>
                 </x-tab-content>
                 <div class="mt-6">

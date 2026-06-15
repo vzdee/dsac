@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\User;
+use App\Support\Catalogs\FiscalRegime;
 use App\Support\Catalogs\MexicoStates;
 use Illuminate\Http\Request;
 
@@ -31,6 +32,7 @@ class ClientController extends Controller
             'fiscal-data' => ['address', 'postal_code', 'rfc', 'curp', 'social_reason', 'fiscal_regime'],];
         $errors = session('errors');
         $states = MexicoStates::options();
+        $regime = FiscalRegime::options();
         if ($errors) {
             foreach ($errorGroups as $tabName => $fields) {
                 if ($errors->hasAny($fields)) {
@@ -39,7 +41,7 @@ class ClientController extends Controller
                 }
             }
         }
-        return view('admin.clients.create', compact('defaultTab', 'errorGroups', 'states'));
+        return view('admin.clients.create', compact('defaultTab', 'errorGroups', 'states', 'regime'));
     }
 
     /**
@@ -131,7 +133,8 @@ class ClientController extends Controller
             }
         }
         $states = MexicoStates::options();
-        return view('admin.clients.edit', compact('client', 'defaultTab', 'errorGroups', 'states'));
+        $regime = FiscalRegime::options();
+        return view('admin.clients.edit', compact('client', 'defaultTab', 'errorGroups', 'states', 'regime'));
     }
 
     /**
