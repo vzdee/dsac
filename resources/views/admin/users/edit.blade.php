@@ -35,7 +35,8 @@
                     <x-ts-input label="Apellido(s) *" name="last_name" placeholder="Ej: Pérez García" maxlength="50" :value="old('last_name', $user->last_name)" required/>
                     <x-ts-select.styled label="Género *" name="gender" placeholder="Elige una opción"
                     :options="[['value' => 'male', 'label' => 'Masculino'], ['value' => 'female', 'label' => 'Femenino']]" :value="old('gender', $user->gender)"  required />
-                    <x-ts-date label="Fecha de Nacimiento *" name="birth_date" placeholder="Ej: 26/03/2003" :min-date="now()->subYears(90)->format('Y-m-d')" :max-date="now()->subYears(18)->format('Y-m-d')" :value="old('birth_date', $user->birth_date)" required/>
+                    <x-ts-date label="Fecha de Nacimiento *" name="birth_date" format="DD/MM/YYYY" placeholder="Ej: 26/03/2003" 
+                    :min-date="now()->subYears(90)->format('Y-m-d')" :max-date="now()->subYears(18)->format('Y-m-d')" :value="old('birth_date', $user->birth_date)" required/>
                 </div>
                 <div class="flex flex-col gap-3 border border-gray-200 bg-white p-5 shadow-sm rounded-lg">
                     <div>
