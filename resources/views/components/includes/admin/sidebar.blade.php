@@ -5,8 +5,12 @@
             'icon' => 'fa-solid fa-gauge',
             'href' => route('admin.index'),
             'active' => request()->routeIs('admin.index'),
-        ],
-        [
+        ],[
+            'name' => 'Citas',
+            'icon' => 'fa-solid fa-calendar-days',
+            'href' => '#',
+            'active' => '',
+        ],[
             'name' => 'Usuarios',
             'icon' => 'fa-solid fa-users',
             'href' => route('admin.users.index'),
@@ -17,18 +21,16 @@
             'icon' => 'fa-solid fa-user-group',
             'href' => route('admin.clients.index'),
             'active' => request()->routeIs('admin.clients.*'),
-        ],
-        [
+        ],[
+            'name' => 'Empleados',
+            'icon' => 'fa-solid fa-user-tie',
+            'href' => route('admin.employees.index'),
+            'active' => request()->routeIs('admin.employees.*'),
+        ],[
             'name' => 'Servicios',
             'icon' => 'fa-solid fa-briefcase',
             'href' => route('admin.services.index'),
             'active' => request()->routeIs('admin.services.*'),
-        ],
-        [
-            'name' => 'Citas',
-            'icon' => 'fa-solid fa-calendar-days',
-            'href' => '#',
-            'active' => '',
         ],
     ];
 @endphp

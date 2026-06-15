@@ -77,4 +77,8 @@ class User extends Authenticatable
     public function client(){
         return $this->hasOne(Client::class);
     }
+
+    public function accountant(){
+        return $this->hasOne(Accountant::class);
+    }
 }
