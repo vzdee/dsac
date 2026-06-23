@@ -19,4 +19,9 @@ class Service extends Model
     protected $cast = [
         'price' => 'integer',
     ];
+
+    public function appoointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }
