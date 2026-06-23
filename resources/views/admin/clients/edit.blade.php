@@ -38,7 +38,7 @@
             <x-tab :active="$defaultTab">
                 {{-- tab links --}}
                 <x-slot name="header">
-                    <x-tab-link tab="general-data">
+                    <x-tab-link tab="general-data" :error="$errors->hasAny($errorGroups['general-data'])">
                         <i class="fa-solid fa-user me-2"></i>
                         Datos Generales
                     </x-tab-link>

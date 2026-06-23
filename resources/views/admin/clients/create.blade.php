@@ -68,7 +68,7 @@
                             <p class="text-sm text-gray-500">Proporciona la información de nacimiento del cliente.</p>
                         </div>
                         <x-ts-date label="Fecha de Nacimiento *" name="birth_date" format="DD/MM/YYYY" :min-date="now()->subYears(90)->format('Y-m-d')" :max-date="now()->subYears(18)->format('Y-m-d')" :value="old('birth_date')" placeholder="Ej: 26/03/2003" required />
-                        <x-ts-select.styled label="Género *" name="gender" placeholder="Masculino" :options="[
+                        <x-ts-select.styled label="Género *" name="gender" placeholder="Ej: Masculino" :options="[
                             ['value' => 'male', 'label' => 'Masculino'], ['value' => 'female', 'label' => 'Femenino']]" :value="old('gender')" required />
                     </div>
                     <div class="flex flex-col gap-4 border border-gray-200 bg-white p-5 rounded-lg shadow-sm">

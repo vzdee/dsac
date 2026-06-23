@@ -122,7 +122,9 @@ class ClientController extends Controller
         $defaultTab = 'general-data';
 
         // fields that can have errors
-        $errorGroups = ['fiscal-data' => ['address', 'postal_code', 'rfc', 'curp', 'social_reason', 'fiscal_regime'],];
+        $errorGroups = [
+            'general-data' => ['name', 'last_name', 'email', 'phone_number', 'password' ],
+            'fiscal-data' => ['address', 'postal_code', 'rfc', 'curp', 'social_reason', 'fiscal_regime'],];
         $errors = session('errors');
         if ($errors) {
             foreach ($errorGroups as $tabName => $fields) {
