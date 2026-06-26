@@ -8,8 +8,8 @@
         ],[
             'name' => 'Citas',
             'icon' => 'fa-solid fa-calendar-days',
-            'href' => '#',
-            'active' => '',
+            'href' => route('admin.appointments.index'),
+            'active' => request()->routeIs('admin.appointments.*'),
         ],[
             'name' => 'Usuarios',
             'icon' => 'fa-solid fa-users',
