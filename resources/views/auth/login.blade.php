@@ -1,6 +1,8 @@
 <x-guest-layout>
     <x-authentication-card title="Bienvenido de nuevo" subtitle="Iniciar Sesión" description="Ingresa tus datos para acceder a tu cuenta, gestionar tus citas, servicios y mantener tu información fiscal actualizada.">
 
+        <x-validation-errors class="mb-4" />
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div>
