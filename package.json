@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "flowbite": "^4.0.2",
+        "fullcalendar": "^6.1.21",
         "sweetalert2": "^11.26.25"
     }
 }
