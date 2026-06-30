@@ -1,38 +1,5 @@
 @php
-    $routes = [
-        [
-            'name' => 'Dashboard',
-            'icon' => 'fa-solid fa-gauge',
-            'href' => route('admin.index'),
-            'active' => request()->routeIs('admin.index'),
-        ],[
-            'name' => 'Citas',
-            'icon' => 'fa-solid fa-calendar-days',
-            'href' => route('admin.appointments.index'),
-            'active' => request()->routeIs('admin.appointments.*'),
-        ],[
-            'name' => 'Usuarios',
-            'icon' => 'fa-solid fa-users',
-            'href' => route('admin.users.index'),
-            'active' => request()->routeIs('admin.users.*'),
-        ],
-        [
-            'name' => 'Clientes',
-            'icon' => 'fa-solid fa-user-group',
-            'href' => route('admin.clients.index'),
-            'active' => request()->routeIs('admin.clients.*'),
-        ],[
-            'name' => 'Empleados',
-            'icon' => 'fa-solid fa-user-tie',
-            'href' => route('admin.employees.index'),
-            'active' => request()->routeIs('admin.employees.*'),
-        ],[
-            'name' => 'Servicios',
-            'icon' => 'fa-solid fa-briefcase',
-            'href' => route('admin.services.index'),
-            'active' => request()->routeIs('admin.services.*'),
-        ],
-    ];
+    $menuItems = config('menu.sidebar', []);
 @endphp
 
 <aside id="top-bar-sidebar"
@@ -49,17 +16,21 @@
 
         {{-- Navegación --}}
         <nav class="flex flex-1 flex-col gap-1">
-            @foreach ($routes as $route)
-                <a href="{{ $route['href'] }}"
-                    class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition {{ $route['active'] ? 'bg-[#B0393f] text-white shadow-sm' : 'text-[#4B4643] hover:bg-[#B0393F]/10 hover:text-[#B0393F]' }}">
-                    <span
-                        class="flex h-9 w-9 items-center justify-center rounded-lg transition {{ $route['active'] ? 'bg-white/15 text-white' : 'bg-[#F7F4EF] text-[#B0393F] group-hover:bg-white' }}">
-                        <i class="{{ $route['icon'] }} text-sm"></i>
-                    </span>
-                    <span>
-                        {{ $route['name'] }}
-                    </span>
-                </a>
+            @foreach ($menuItems as $item)
+                @hasanyrole($item['roles'])
+                    @php
+                        $isActive = request()->routeIs($item['active_pattern']);
+                    @endphp
+                    <a href="{{ route($item['route']) }}"
+                        class="group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition {{ $isActive ? 'bg-[#B0393f] text-white shadow-sm' : 'text-[#4B4643] hover:bg-[#B0393F]/10 hover:text-[#B0393F]' }}">
+                        <span class="flex h-9 w-9 items-center justify-center rounded-lg transition {{ $isActive ? 'bg-white/15 text-white' : 'bg-[#F7F4EF] text-[#B0393F] group-hover:bg-white' }}">
+                            <i class="{{ $item['icon'] }} text-sm"></i>
+                        </span>
+                        <span>
+                            {{ $item['name'] }}
+                        </span>
+                    </a>
+                @endhasanyrole
             @endforeach
         </nav>
     </div>

@@ -41,7 +41,7 @@ class UserTable extends DataTableComponent
                     $role = $row->roles->first()?->name;
                     return match ($role) {
                         'Administrador' => '<span class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-1 text-xs font-semibold text-red-700">Administrador</span>',
-                        'Contador' => '<span class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-1 text-xs font-semibold text-red-700">Contador</span>',
+                        'Contador' => '<span class="inline-flex items-center rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">Contador</span>',
                         'Cliente' => '<span class="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-700">Cliente</span>',
                         default => '<span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-xs font-semibold text-gray-700">Sin Rol</span>',
                     };

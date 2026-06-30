@@ -14,7 +14,7 @@
         </div>
     </x-slot>
     <div>
-        <x-ts-button href="{{ route('admin.users.create') }}" text="Crear Usuario" icon="plus" sm/>
+        <x-ts-button href="{{ route('admin.users.create') }}" text="Nuevo Usuario" icon="plus" sm/>
         <div class="mt-6">
             {{-- table --}}
             @livewire('admin.user-table')
