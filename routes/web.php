@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Service;
 
 Route::get('/', function () {
     return view('home/index');
@@ -11,7 +12,8 @@ Route::get('acerca-de', function(){
 })->name('about-us');
 
 Route::get('servicios', function(){
-    return view('home/services');
+    $services = Service::where('status', 'active')->get();
+    return view('home/services', compact('services'));
 })->name('services');
 
 Route::middleware([
