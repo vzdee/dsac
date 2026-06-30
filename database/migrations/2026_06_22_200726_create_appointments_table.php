@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('employee_id')->constrained('accountants')->cascadeOnDelete();
             $table->foreignId('service_id')->constrained('services')->cascadeOnDelete();
             $table->dateTime('scheduled_at');
-            $table->enum('status', ['pending', 'confirmed', 'completed', 'cancelled'])->default('pending');
+            $table->enum('status', ['pending', 'programmed', 'completed', 'cancelled'])->default('pending');
             $table->integer('price');
             $table->enum('payment_method', ['cash', 'card', 'transfer'])->default('cash');
             $table->enum('payment_status', ['pending', 'paid', 'refunded'])->default('pending');

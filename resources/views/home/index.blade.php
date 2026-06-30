@@ -29,11 +29,13 @@
             </ul>
 
             <div class="flex flex-col gap-3 sm:flex-row">
-                <a href="{{ route('request-service') }}" class="inline-flex items-center justify-center rounded-lg bg-[#B0393F] px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-[#B0393F]/20 transition hover:bg-[#8a2d33] hover:shadow-md">
+                <a href="https://wa.me/529991398765?text=Hola,%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20sobre%20sus%20servicios.%20%C2%BFPodr%C3%ADan%20ayudarme?"
+                    target="_blank" rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center rounded-lg bg-[#B0393F] px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-[#B0393F]/20 transition hover:bg-[#8a2d33] hover:shadow-md">
                     Agendar Cita
                 </a>
 
-                <a href="#servicios" class="inline-flex items-center justify-center rounded-lg border border-[#D8D2CF] bg-white px-5 py-3 text-sm font-semibold text-gray-700 shadow-sm transition hover:border-[#B0393F] hover:bg-[#B0393F]/5 hover:text-[#B0393F]">
+                <a href="{{ route('services') }}" class="inline-flex items-center justify-center rounded-lg border border-[#D8D2CF] bg-white px-5 py-3 text-sm font-semibold text-gray-700 shadow-sm transition hover:border-[#B0393F] hover:bg-[#B0393F]/5 hover:text-[#B0393F]">
                     Ver servicios →
                 </a>
             </div>
@@ -177,7 +179,7 @@
                 </p>
 
                 <div class="flex flex-col gap-3 sm:flex-row">
-                    <a href="{{ route('request-service') }}"
+                    <a href="https://wa.me/529991398765?text=Hola,%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20sobre%20sus%20servicios.%20%C2%BFPodr%C3%ADan%20ayudarme?" target="_blank" rel="noopener noreferrer"
                         class="inline-flex items-center justify-center rounded-lg bg-[#B0393F] px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-[#B0393F]/20 transition hover:bg-[#8a2d33] hover:shadow-md">
                         <i class="fa-regular fa-calendar text-xl mr-2"></i>
                         Agendar Cita

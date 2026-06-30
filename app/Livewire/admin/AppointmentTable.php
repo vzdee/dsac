@@ -31,9 +31,9 @@ class AppointmentTable extends DataTableComponent
                 ->format(function ($value) {
                     return match ($value) {
                         'pending' => '<span class="bg-yellow-200 text-yellow-800 p-2 rounded text-xs">Pendiente</span>',
-                        'confirmed' => '<span class="bg-green-200 text-green-800 p-2 rounded text-xs">Confirmada</span>',
+                        'programmed' => '<span class="bg-blue-200 text-blue-800 p-2 rounded text-xs">Programada</span>',
                         'cancelled' => '<span class="bg-red-200 text-red-800 p-2 rounded text-xs">Cancelada</span>',
-                        default => '<span class="bg-gray-200 text-gray-800 p-2 rounded text-xs">Completada</span>',
+                        'completed' => '<span class="bg-green-200 text-green-800 p-2 rounded text-xs">Completada</span>',
                     };
                 })->html(),
             Column::make("Fecha Programada", "scheduled_at")

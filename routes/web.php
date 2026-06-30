@@ -6,10 +6,6 @@ Route::get('/', function () {
     return view('home/index');
 })->name('home');
 
-Route::get('solicitar-servicio', function(){
-    return view('home/request-service');
-})->name('request-service');
-
 Route::get('acerca-de', function(){
     return view('home/about-us');
 })->name('about-us');

@@ -46,11 +46,6 @@
                         Contacto
                     </a>
                 </li>
-                <li class="mt-3 border-t border-gray-100 pt-4 md:hidden">
-                    <a href="{{ route('request-service') }}" class="block rounded-lg bg-[#B0393F] px-4 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-[#8a2d33]">
-                        Agendar cita
-                    </a>
-                </li>
                 <li class="md:hidden mt-3">
                     <a href="{{ route('login') }}" class="block rounded-lg border border-gray-300 px-4 py-2.5 text-center text-sm font-semibold text-gray-700 transition hover:border-[#B0393F] hover:bg-[#B0393F]/5 hover:text-[#B0393F]">
                         Acceso empleados
@@ -59,9 +54,6 @@
             </ul>
         </div>
         <div class="hidden md:flex md:items-center md:space-x-3 rtl:space-x-reverse">
-            <a href="{{ route('request-service') }}" class="rounded-lg bg-[#B0393F] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#8a2d33]">
-                Agendar Cita
-            </a>
             <a href="{{ route('login') }}" class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:border-[#B0393F] hover:bg-[#B0393F]/5 hover:text-[#B0393F]">
                 Acceso Empleados
             </a>

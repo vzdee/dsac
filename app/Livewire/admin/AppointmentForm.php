@@ -44,7 +44,7 @@ class AppointmentForm extends Component
             'service' => 'required',
             'date' => 'required|date',
             'time' => 'required',
-            'appointmentStatus' => 'required|in:pending,confirmed,completed,cancelled',
+            'appointmentStatus' => 'required|in:pending,programmed,completed,cancelled',
             'price' => 'required|numeric|min:0',
             'paymentMethod' => 'required|in:cash,card,transfer',
             'paymentStatus' => 'required|in:pending,paid,refunded',
@@ -91,7 +91,7 @@ class AppointmentForm extends Component
 
         $this->appointmentStatusesOptions = [
             ['value' => 'pending', 'label' => 'Pendiente'],
-            ['value' => 'confirmed', 'label' => 'Confirmada'],
+            ['value' => 'programmed', 'label' => 'Programada'],
             ['value' => 'completed', 'label' => 'Completada'],
             ['value' => 'cancelled', 'label' => 'Cancelada'],
         ];
@@ -178,10 +178,42 @@ class AppointmentForm extends Component
         ];
 
         if ($this->appointmentId) {
-            Appointment::findOrFail($this->appointmentId)->update($data);
+            $appointment = Appointment::findOrFail($this->appointmentId);
+            
+            // Verificamos si cambió la fecha, el servicio o si el estado de pago pasó a "paid"
+            $oldDate = $appointment->scheduled_at ? Carbon::parse($appointment->scheduled_at)->format('Y-m-d H:i') : null;
+            $newDate = Carbon::parse($this->date . ' ' . $this->time)->format('Y-m-d H:i');
+            
+            $oldService = $appointment->service_id;
+            $newService = $this->service;
+            
+            $oldEmployee = $appointment->employee_id;
+            $newEmployee = $this->employee;
+            
+            $oldPaymentStatus = $appointment->payment_status;
+            $newPaymentStatus = $this->paymentStatus;
+            
+            $oldStatus = $appointment->status;
+            $newStatus = $this->appointmentStatus;
+            
+            $appointment->update($data);
+            
+            $changes = [];
+            if ($oldDate !== $newDate) $changes[] = 'date';
+            if ($oldService != $newService) $changes[] = 'service';
+            if ($oldEmployee != $newEmployee) $changes[] = 'employee';
+            if ($oldPaymentStatus !== 'paid' && $newPaymentStatus === 'paid') $changes[] = 'payment';
+            if ($oldStatus === 'pending' && $newStatus === 'programmed') $changes[] = 'status';
+            
+            // Solo disparamos el evento si hubo cambios en los campos que nos importan
+            if (count($changes) > 0) {
+                \App\Events\AppointmentUpdated::dispatch($appointment, $changes);
+            }
+            
         } else {
+            $appointment = Appointment::create($data);
 
-            Appointment::create($data);
+            \App\Events\AppointmentCreated::dispatch($appointment);
         }
 
         // Emitimos notificación nativa de Livewire / TallStackUI o redirigimos

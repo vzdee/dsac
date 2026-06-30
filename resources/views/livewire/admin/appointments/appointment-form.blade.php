@@ -116,7 +116,7 @@
             <div class="p-5 sm:p-6 space-y-5">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <x-ts-date label="Fecha de Cita *" placeholder="Elige una fecha de cita" min-date="today"
-                        format="DD MMMM YYYY" wire:model.live="searchDate" />
+                        format="DD MMMM YYYY" wire:model.live="searchDate" weekdays />
 
                     <x-ts-select.styled label="Estado de la Cita *" placeholder="Selecciona un estado para la cita"
                         wire:model.live="appointmentStatus" :options="$appointmentStatusesOptions" />
